@@ -1,0 +1,249 @@
+❯ sqlite3 practice.db
+SQLite version 3.39.5 2022-10-14 20:58:05
+Enter .help for usage hints.
+sqlite> .read seed-data.sql
+Error: cannot open seed-data.sql
+sqlite> .read sql-practice/seed-data.sql
+sqlite> .table
+puppies
+sqlite> select * from puppies
+   ...> ;
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> .headers on 
+sqlite> select * from puppies
+   ...> ;
+id|name|age_yrs|breed|weight_lbs|microchipped
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> select name,age, weight from puppies;
+Parse error: no such column: age
+  select name,age, weight from puppies;
+              ^--- error here
+sqlite> select name ,age, weight from puppies;
+Parse error: no such column: age
+  select name ,age, weight from puppies;
+               ^--- error here
+sqlite> select name, age, weight from puppies;
+Parse error: no such column: age
+  select name, age, weight from puppies;
+               ^--- error here
+sqlite> select * from puppies
+   ...> ;
+id|name|age_yrs|breed|weight_lbs|microchipped
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> select name, age_yrs, weight from puppies;
+Parse error: no such column: weight
+  select name, age_yrs, weight from puppies;
+                        ^--- error here
+sqlite> select name, age_yrs, weight_lbs from puppies;
+name|age_yrs|weight_lbs
+Cooper|1|18
+Indie|0.5|13
+Kota|0.7|26
+Zoe|0.8|32
+Charley|1.5|25
+Ladybird|0.6|20
+Callie|0.9|16
+Jaxson|0.4|19
+Leinni|1|25
+Max|1.6|65
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE id = 5;
+name|age_yrs|weight_lbs
+Charley|1.5|25
+sqlite> select * from puppies
+   ...> ;
+id|name|age_yrs|breed|weight_lbs|microchipped
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE microchipped = 1;
+name|age_yrs|weight_lbs
+Cooper|1|18
+Indie|0.5|13
+Zoe|0.8|32
+Ladybird|0.6|20
+Jaxson|0.4|19
+Leinni|1|25
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE microchipped = true;
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE microchipped = 1;
+name|age_yrs|weight_lbs
+Cooper|1|18
+Indie|0.5|13
+Zoe|0.8|32
+Ladybird|0.6|20
+Jaxson|0.4|19
+Leinni|1|25
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25;
+name|age_yrs|weight_lbs
+Kota|0.7|26
+Zoe|0.8|32
+Max|1.6|65
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped=1;
+Parse error: no such column: microschipped
+  weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped=1;
+                                      error here ---^
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped = 1;
+Parse error: no such column: microschipped
+  weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped = 1;
+                                      error here ---^
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25 AND microchipped = 1;
+name|age_yrs|weight_lbs
+Zoe|0.8|32
+sqlite> ^D❯ sqlite3 practice.db
+SQLite version 3.39.5 2022-10-14 20:58:05
+Enter .help for usage hints.
+sqlite> .read seed-data.sql
+Error: cannot open seed-data.sql
+sqlite> .read sql-practice/seed-data.sql
+sqlite> .table
+puppies
+sqlite> select * from puppies
+   ...> ;
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> .headers on 
+sqlite> select * from puppies
+   ...> ;
+id|name|age_yrs|breed|weight_lbs|microchipped
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> select name,age, weight from puppies;
+Parse error: no such column: age
+  select name,age, weight from puppies;
+              ^--- error here
+sqlite> select name ,age, weight from puppies;
+Parse error: no such column: age
+  select name ,age, weight from puppies;
+               ^--- error here
+sqlite> select name, age, weight from puppies;
+Parse error: no such column: age
+  select name, age, weight from puppies;
+               ^--- error here
+sqlite> select * from puppies
+   ...> ;
+id|name|age_yrs|breed|weight_lbs|microchipped
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> select name, age_yrs, weight from puppies;
+Parse error: no such column: weight
+  select name, age_yrs, weight from puppies;
+                        ^--- error here
+sqlite> select name, age_yrs, weight_lbs from puppies;
+name|age_yrs|weight_lbs
+Cooper|1|18
+Indie|0.5|13
+Kota|0.7|26
+Zoe|0.8|32
+Charley|1.5|25
+Ladybird|0.6|20
+Callie|0.9|16
+Jaxson|0.4|19
+Leinni|1|25
+Max|1.6|65
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE id = 5;
+name|age_yrs|weight_lbs
+Charley|1.5|25
+sqlite> select * from puppies
+   ...> ;
+id|name|age_yrs|breed|weight_lbs|microchipped
+1|Cooper|1|Miniature Schnauzer|18|1
+2|Indie|0.5|Yorkshire Terrier|13|1
+3|Kota|0.7|Australian Shepherd|26|0
+4|Zoe|0.8|Korean Jindo|32|1
+5|Charley|1.5|Basset Hound|25|0
+6|Ladybird|0.6|Labradoodle|20|1
+7|Callie|0.9|Corgi|16|0
+8|Jaxson|0.4|Beagle|19|1
+9|Leinni|1|Miniature Schnauzer|25|1
+10|Max|1.6|German Shepherd|65|0
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE microchipped = 1;
+name|age_yrs|weight_lbs
+Cooper|1|18
+Indie|0.5|13
+Zoe|0.8|32
+Ladybird|0.6|20
+Jaxson|0.4|19
+Leinni|1|25
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE microchipped = true;
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE microchipped = 1;
+name|age_yrs|weight_lbs
+Cooper|1|18
+Indie|0.5|13
+Zoe|0.8|32
+Ladybird|0.6|20
+Jaxson|0.4|19
+Leinni|1|25
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25;
+name|age_yrs|weight_lbs
+Kota|0.7|26
+Zoe|0.8|32
+Max|1.6|65
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped=1;
+Parse error: no such column: microschipped
+  weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped=1;
+                                      error here ---^
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped = 1;
+Parse error: no such column: microschipped
+  weight_lbs from puppies WHERE weight_lbs > 25 AND microschipped = 1;
+                                      error here ---^
+sqlite> select name, age_yrs, weight_lbs from puppies WHERE weight_lbs > 25 AND microchipped = 1;
+name|age_yrs|weight_lbs
+Zoe|0.8|32
+sqlite> ^D
